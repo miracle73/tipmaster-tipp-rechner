@@ -3,24 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Tipp-Rechner WM 2026 — wie viele Punkte bringt dein Tipp?</title>
-<meta name="description" content="Rechne aus, wie viele Punkte dein WM-Tipp bringt. Trag Tipp und Ergebnis ein, sieh sofort die Wertung — und was ein anderer Tipp gebracht hätte.">
-<meta property="og:title" content="Tipp-Rechner WM 2026 — wie viele Punkte bringt dein Tipp?">
-<meta property="og:description" content="Trag Tipp und Ergebnis ein, sieh sofort die Wertung.">
+<title>tipp-rechner — WM 2026</title>
+<meta name="description" content="Trag deinen Tipp und das Ergebnis ein. Sieh sofort, wie viele Punkte es bringt und was ein anderes Ergebnis gebracht hätte.">
+<meta property="og:title" content="tipp-rechner — WM 2026">
+<meta property="og:description" content="Wie viele Punkte bringt dein Tipp?">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#FBFAF6;
-  --rule:#D9D6CC;
-  --ink:#16306B;
-  --ink-soft:#4A5F92;
-  --stamp:#C1202E;
-  --graphite:#23231F;
-  --muted:#6E6C63;
-  --win:#1C6B3C;
+  --bg:#F2F2EE;
+  --ink:#0F0F0E;
+  --mute:#8A8A83;
+  --line:#DCDCD5;
+  --accent:#1F3BFF;
+  --hit:#00A85A;
   box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px);
   padding-bottom:env(safe-area-inset-bottom,0px);
@@ -28,196 +26,208 @@
 *,*::before,*::after{box-sizing:inherit}
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --paper:#15161A; --rule:#31333B; --ink:#9EB6F0; --ink-soft:#8595BE;
-    --stamp:#F0616E; --graphite:#EDECE7; --muted:#9A988F; --win:#5FC98C;
+    --bg:#0E0E0D; --ink:#F2F2EE; --mute:#7E7E77; --line:#26261F;
+    --accent:#7E90FF; --hit:#3FD98C;
   }
 }
 :root[data-theme="dark"]{
-  --paper:#15161A; --rule:#31333B; --ink:#9EB6F0; --ink-soft:#8595BE;
-  --stamp:#F0616E; --graphite:#EDECE7; --muted:#9A988F; --win:#5FC98C;
+  --bg:#0E0E0D; --ink:#F2F2EE; --mute:#7E7E77; --line:#26261F;
+  --accent:#7E90FF; --hit:#3FD98C;
 }
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{
-  margin:0; background:var(--paper); color:var(--graphite);
-  font-family:Archivo,"Helvetica Neue",Arial,sans-serif;
-  font-size:17px; line-height:1.5;
-  background-image:linear-gradient(var(--rule) 1px,transparent 1px);
-  background-size:100% 34px; background-position:0 -1px;
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:Archivo,-apple-system,Helvetica,Arial,sans-serif;
+  font-size:17px;line-height:1.45;-webkit-font-smoothing:antialiased;
 }
-.wrap{max-width:660px;margin:0 auto;padding:34px 20px 68px}
+.display{font-family:"Bricolage Grotesque",Archivo,sans-serif}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
 
-header{border-bottom:3px solid var(--ink);padding-bottom:14px;margin-bottom:8px}
-.slip{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;color:var(--stamp);font-weight:700}
-h1{font-size:clamp(30px,7vw,46px);font-weight:800;line-height:1.02;margin:8px 0 10px;letter-spacing:-.02em;color:var(--ink)}
-.sub{margin:0;color:var(--muted);max-width:46ch}
+nav{display:flex;justify-content:space-between;align-items:center;padding:26px 0;font-size:14px;color:var(--mute)}
+nav .mark{color:var(--ink);font-weight:600;letter-spacing:-.01em}
 
-.rules{margin:26px 0 30px;padding:16px 18px;border:1px solid var(--rule);background:transparent}
-.rules h2{font-size:14px;margin:0 0 10px;font-weight:600;color:var(--muted)}
-.rules ul{margin:0;padding:0;list-style:none}
-.rules li{display:flex;justify-content:space-between;gap:14px;padding:5px 0;border-bottom:1px dotted var(--rule);font-size:15px}
-.rules li:last-child{border-bottom:0}
-.pts{font-family:"IBM Plex Mono",monospace;font-weight:700;color:var(--ink);white-space:nowrap}
+.hero{padding:clamp(40px,9vw,110px) 0 clamp(36px,6vw,64px)}
+.eyebrow{font-size:14px;color:var(--mute);margin:0 0 clamp(16px,3vw,28px)}
+h1{
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
+  font-size:clamp(48px,12.5vw,168px);line-height:.86;letter-spacing:-.045em;
+  margin:0;text-wrap:balance;
+}
+h1 em{font-style:normal;color:var(--accent)}
+.lede{margin:clamp(24px,4vw,40px) 0 0;max-width:34ch;font-size:clamp(17px,2vw,21px);color:var(--mute)}
 
-.board{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:12px;margin:0 0 6px}
-.team{display:flex;flex-direction:column;gap:6px}
-.team label{font-size:13px;color:var(--muted)}
+.rule{height:1px;background:var(--line);border:0;margin:0}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);padding:clamp(36px,6vw,72px) 0}
+@media (max-width:760px){.grid{grid-template-columns:1fr;gap:40px}}
+
+.lbl{font-size:13px;color:var(--mute);margin:0 0 14px}
+.teams{display:flex;gap:12px;margin-bottom:22px}
 input[type=text]{
-  font-family:Archivo,sans-serif;font-size:16px;padding:9px 10px;
-  border:1px solid var(--rule);background:transparent;color:var(--graphite);width:100%;
+  flex:1;min-width:0;font-family:Archivo,sans-serif;font-size:15px;
+  padding:11px 13px;border:1px solid var(--line);border-radius:2px;
+  background:transparent;color:var(--ink);
 }
-.scores{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin:14px 0}
-.colon{font-family:"IBM Plex Mono",monospace;font-size:26px;color:var(--muted)}
+.pair{display:flex;align-items:center;gap:clamp(8px,2vw,18px)}
 input[type=number]{
-  font-family:"IBM Plex Mono",monospace;font-weight:700;font-size:34px;text-align:center;
-  width:100%;padding:10px 4px;border:2px solid var(--ink);background:transparent;color:var(--ink);
-  -moz-appearance:textfield;
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
+  font-size:clamp(56px,11vw,104px);line-height:1;letter-spacing:-.04em;
+  width:100%;min-width:0;text-align:center;padding:6px 0;
+  border:0;border-bottom:3px solid var(--ink);border-radius:0;
+  background:transparent;color:var(--ink);-moz-appearance:textfield;
 }
-input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-input:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.sep{font-family:"Bricolage Grotesque",sans-serif;font-weight:500;font-size:clamp(34px,7vw,64px);color:var(--mute);line-height:1}
+input:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+fieldset{border:0;margin:0;padding:0}
 
-fieldset{border:0;padding:0;margin:0 0 24px}
-legend{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;color:var(--stamp);font-weight:700;padding:0}
+.result{padding:clamp(44px,8vw,96px) 0;display:grid;grid-template-columns:auto 1fr;gap:clamp(28px,6vw,72px);align-items:center}
+@media (max-width:760px){.result{grid-template-columns:1fr;gap:20px}}
+.score{
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;
+  font-size:clamp(110px,26vw,290px);line-height:.78;letter-spacing:-.06em;
+  color:var(--accent);
+}
+.verdict{font-family:"Bricolage Grotesque",sans-serif;font-weight:500;font-size:clamp(26px,4.4vw,52px);line-height:1.05;letter-spacing:-.03em;margin:0}
+.why{margin:16px 0 0;color:var(--mute);max-width:40ch}
 
-.verdict{border:3px solid var(--ink);padding:20px;margin:6px 0 28px}
-.verdict .big{font-family:"IBM Plex Mono",monospace;font-size:clamp(44px,13vw,72px);font-weight:700;line-height:1;color:var(--ink)}
-.verdict .label{font-size:18px;font-weight:600;margin-top:4px}
-.verdict .why{color:var(--muted);font-size:15px;margin-top:8px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);padding:clamp(36px,6vw,72px) 0 clamp(60px,9vw,120px)}
+@media (max-width:760px){.cols{grid-template-columns:1fr;gap:48px}}
+h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,28px);letter-spacing:-.02em;margin:0 0 22px}
+.row{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);font-size:16px}
+.row:last-child{border-bottom:0}
+.num{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-variant-numeric:tabular-nums}
+.row.you{color:var(--accent)}
+.up{color:var(--hit);font-weight:600}
+.flat{color:var(--mute)}
 
-h2.section{font-size:15px;font-weight:600;color:var(--muted);margin:0 0 10px}
-table{width:100%;border-collapse:collapse;font-size:15px}
-th{text-align:left;font-weight:600;font-size:13px;color:var(--muted);padding:6px 0;border-bottom:1px solid var(--rule)}
-td{padding:7px 0;border-bottom:1px dotted var(--rule);font-family:"IBM Plex Mono",monospace}
-td.gain{color:var(--win);font-weight:700}
-td.same{color:var(--muted)}
-tr.now td{color:var(--stamp);font-weight:700}
-footer{margin-top:40px;padding-top:14px;border-top:1px solid var(--rule);font-size:13px;color:var(--muted)}
+footer{padding:34px 0 60px;border-top:1px solid var(--line);color:var(--mute);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 a{color:var(--ink)}
-@media (max-width:460px){
-  .board{grid-template-columns:1fr;gap:10px}
-  .board .colon{display:none}
-}
 </style>
 </head>
 <body>
+
 <div class="wrap">
-
-<header>
-  <div class="slip">TIPPSCHEIN · WM 2026</div>
-  <h1>Wie viele Punkte bringt dein Tipp?</h1>
-  <p class="sub">Trag deinen Tipp und das echte Ergebnis ein. Du siehst sofort die Wertung — und was andere Tipps gebracht hätten.</p>
-</header>
-
-<section class="rules">
-  <h2>Wertung</h2>
-  <ul>
-    <li><span>Exaktes Ergebnis getroffen</span><span class="pts">8 Punkte</span></li>
-    <li><span>Tordifferenz richtig</span><span class="pts">5 Punkte</span></li>
-    <li><span>Nur Sieger richtig</span><span class="pts">3 Punkte</span></li>
-    <li><span>Daneben</span><span class="pts">0 Punkte</span></li>
-  </ul>
-</section>
-
-<fieldset>
-  <legend>DEIN TIPP</legend>
-  <div class="board">
-    <div class="team">
-      <label for="ha">Heim</label>
-      <input type="text" id="ha" value="Deutschland" autocomplete="off">
-    </div>
-    <div></div>
-    <div class="team">
-      <label for="aw">Auswärts</label>
-      <input type="text" id="aw" value="Brasilien" autocomplete="off">
-    </div>
-  </div>
-  <div class="scores">
-    <input type="number" id="th" value="2" min="0" max="20" inputmode="numeric" aria-label="Dein Tipp Heimtore">
-    <span class="colon">:</span>
-    <input type="number" id="ta" value="1" min="0" max="20" inputmode="numeric" aria-label="Dein Tipp Auswärtstore">
-  </div>
-</fieldset>
-
-<fieldset>
-  <legend>ECHTES ERGEBNIS</legend>
-  <div class="scores">
-    <input type="number" id="rh" value="3" min="0" max="20" inputmode="numeric" aria-label="Ergebnis Heimtore">
-    <span class="colon">:</span>
-    <input type="number" id="ra" value="2" min="0" max="20" inputmode="numeric" aria-label="Ergebnis Auswärtstore">
-  </div>
-</fieldset>
-
-<div class="verdict" aria-live="polite">
-  <div class="big" id="points">5</div>
-  <div class="label" id="verdict">Tordifferenz richtig</div>
-  <div class="why" id="why"></div>
+  <nav>
+    <span class="mark">tipp-rechner</span>
+    <span>wm 2026</span>
+  </nav>
 </div>
 
-<h2 class="section">Was ein anderer Tipp gebracht hätte</h2>
-<table>
-  <thead><tr><th>Tipp</th><th>Punkte</th><th>Differenz</th></tr></thead>
-  <tbody id="alts"></tbody>
-</table>
+<div class="wrap">
+  <section class="hero">
+    <p class="eyebrow">Das Tippspiel-Rechenwerk</p>
+    <h1 class="display">Wie viel ist<br>dein Tipp<br><em>wert?</em></h1>
+    <p class="lede">Trag deinen Tipp und das echte Ergebnis ein. Du siehst sofort die Punkte und was ein anderes Ergebnis gebracht hätte.</p>
+  </section>
+</div>
 
-<footer>
-  Gebaut für <a href="https://tipmaster.net/de">TipMaster</a> · Wertung als Beispiel, nach dem Prinzip „je genauer der Tipp, desto mehr Punkte“.
-</footer>
+<hr class="rule">
 
+<div class="wrap">
+  <div class="grid">
+    <fieldset>
+      <p class="lbl">Dein Tipp</p>
+      <div class="teams">
+        <input type="text" id="ha" value="Deutschland" autocomplete="off" aria-label="Heimmannschaft">
+        <input type="text" id="aw" value="Brasilien" autocomplete="off" aria-label="Auswärtsmannschaft">
+      </div>
+      <div class="pair">
+        <input type="number" id="th" value="2" min="0" max="20" inputmode="numeric" aria-label="Dein Tipp Heimtore">
+        <span class="sep">:</span>
+        <input type="number" id="ta" value="1" min="0" max="20" inputmode="numeric" aria-label="Dein Tipp Auswärtstore">
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <p class="lbl">Das Ergebnis</p>
+      <div class="teams" aria-hidden="true" style="visibility:hidden"><input type="text" tabindex="-1"></div>
+      <div class="pair">
+        <input type="number" id="rh" value="3" min="0" max="20" inputmode="numeric" aria-label="Ergebnis Heimtore">
+        <span class="sep">:</span>
+        <input type="number" id="ra" value="2" min="0" max="20" inputmode="numeric" aria-label="Ergebnis Auswärtstore">
+      </div>
+    </fieldset>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="wrap">
+  <section class="result" aria-live="polite">
+    <div class="score display" id="points">5</div>
+    <div>
+      <p class="verdict" id="verdict">Tordifferenz richtig</p>
+      <p class="why" id="why"></p>
+    </div>
+  </section>
+</div>
+
+<hr class="rule">
+
+<div class="wrap">
+  <div class="cols">
+    <section>
+      <h2 class="display">Die Wertung</h2>
+      <div class="row"><span>Exaktes Ergebnis</span><span class="num">8</span></div>
+      <div class="row"><span>Tordifferenz richtig</span><span class="num">5</span></div>
+      <div class="row"><span>Sieger richtig</span><span class="num">3</span></div>
+      <div class="row"><span>Daneben</span><span class="num">0</span></div>
+    </section>
+    <section>
+      <h2 class="display">Was andere Tipps gebracht hätten</h2>
+      <div id="alts"></div>
+    </section>
+  </div>
+</div>
+
+<div class="wrap">
+  <footer>
+    <span>Gebaut für <a href="https://tipmaster.net/de">TipMaster</a></span>
+    <span>Wertung als Beispiel</span>
+  </footer>
 </div>
 
 <script>
 const $ = id => document.getElementById(id);
-const F = ['th','ta','rh','ra','ha','aw'].map($);
 
 function score(th,ta,rh,ra){
   if (th===rh && ta===ra) return {p:8,label:'Exaktes Ergebnis'};
   if (th-ta === rh-ra)    return {p:5,label:'Tordifferenz richtig'};
-  const s = Math.sign(th-ta), r = Math.sign(rh-ra);
-  if (s === r)            return {p:3,label:'Sieger richtig'};
+  if (Math.sign(th-ta) === Math.sign(rh-ra)) return {p:3,label:'Sieger richtig'};
   return {p:0,label:'Daneben'};
 }
-
-function outcome(h,a,hn,an){
-  if (h>a) return hn + ' gewinnt';
-  if (a>h) return an + ' gewinnt';
-  return 'Unentschieden';
-}
+const outcome = (h,a,hn,an) => h>a ? hn+' gewinnt' : a>h ? an+' gewinnt' : 'Unentschieden';
 
 function render(){
   const th=+$('th').value||0, ta=+$('ta').value||0;
   const rh=+$('rh').value||0, ra=+$('ra').value||0;
   const hn=$('ha').value.trim()||'Heim', an=$('aw').value.trim()||'Auswärts';
-
   const s = score(th,ta,rh,ra);
+
   $('points').textContent = s.p;
   $('verdict').textContent = s.label;
+  $('why').textContent =
+    s.p===8 ? `${th}:${ta} exakt getroffen. Mehr geht nicht.` :
+    s.p===5 ? `Die Differenz ${th-ta>0?'+':''}${th-ta} stimmt, das Ergebnis ${rh}:${ra} nicht.` :
+    s.p===3 ? `${outcome(rh,ra,hn,an)} richtig getippt, aber ${th}:${ta} statt ${rh}:${ra}.` :
+              `Getippt: ${outcome(th,ta,hn,an)}. Passiert: ${outcome(rh,ra,hn,an)}.`;
 
-  let why;
-  if (s.p===8) why = `${th}:${ta} exakt getroffen. Mehr geht nicht.`;
-  else if (s.p===5) why = `Differenz ${th-ta>0?'+':''}${th-ta} stimmt, das Ergebnis ${rh}:${ra} nicht.`;
-  else if (s.p===3) why = `${outcome(rh,ra,hn,an)} — richtig getippt, aber ${th}:${ta} statt ${rh}:${ra}.`;
-  else why = `Getippt: ${outcome(th,ta,hn,an)}. Passiert ist: ${outcome(rh,ra,hn,an)}.`;
-  $('why').textContent = why;
-
-  // Alternativen: alle Tipps von 0:0 bis 4:4, nach Punkten sortiert, Top 6
-  const rows = [];
-  for (let h=0;h<=4;h++) for (let a=0;a<=4;a++){
-    rows.push({h,a,p:score(h,a,rh,ra).p});
-  }
+  const rows=[];
+  for(let h=0;h<=4;h++) for(let a=0;a<=4;a++) rows.push({h,a,p:score(h,a,rh,ra).p});
   rows.sort((x,y)=> y.p-x.p || (x.h+x.a)-(y.h+y.a));
-  const top = rows.slice(0,6);
-  if (!top.some(r=>r.h===th && r.a===ta)) top.push({h:th,a:ta,p:s.p});
+  const top = rows.slice(0,5);
+  if(!top.some(r=>r.h===th&&r.a===ta)) top.push({h:th,a:ta,p:s.p});
 
   $('alts').innerHTML = top.map(r=>{
-    const d = r.p - s.p;
-    const isNow = r.h===th && r.a===ta;
-    const dCell = d>0 ? `<td class="gain">+${d}</td>`
-                : d<0 ? `<td class="same">${d}</td>`
-                : `<td class="same">—</td>`;
-    return `<tr class="${isNow?'now':''}"><td>${r.h}:${r.a}${isNow?' ← dein Tipp':''}</td><td>${r.p}</td>${dCell}</tr>`;
+    const d=r.p-s.p, you=(r.h===th&&r.a===ta);
+    const delta = d>0 ? `<span class="up">+${d}</span>` : d<0 ? `<span class="flat">${d}</span>` : `<span class="flat">—</span>`;
+    return `<div class="row ${you?'you':''}"><span>${r.h}:${r.a}${you?' · dein Tipp':''}</span><span><span class="num">${r.p}</span> &nbsp;${delta}</span></div>`;
   }).join('');
 }
 
-F.forEach(el => el.addEventListener('input', render));
+['th','ta','rh','ra','ha','aw'].forEach(id=>$(id).addEventListener('input',render));
 render();
 </script>
 </body>
